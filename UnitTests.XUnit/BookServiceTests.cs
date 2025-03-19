@@ -23,6 +23,8 @@ public class BookServiceTests
         var createdBook = await  _bookService.CreateBook(book);
         
         Assert.NotNull(createdBook);
+        Assert.IsType<Guid>(createdBook.Id);
+        Assert.NotEqual(createdBook.Id, Guid.Empty);
         Assert.Equal(book.Title, createdBook.Title);
         Assert.Equal(book.Author, createdBook.Author);
         Assert.Equal(book.Publisher, createdBook.Publisher);
@@ -36,6 +38,7 @@ public class BookServiceTests
         var updatedBook = await  _bookService.UpdateBook(book);
         
         Assert.NotNull(updatedBook);
+        Assert.Equal(book.Id, updatedBook.Id);
         Assert.Equal(book.Title, updatedBook.Title);
         Assert.Equal(book.Author, updatedBook.Author);
         Assert.Equal(book.Publisher, updatedBook.Publisher);

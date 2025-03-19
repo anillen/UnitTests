@@ -30,6 +30,8 @@ public class BookServiceTests
         var createdBook = await _bookService.CreateBook(book);
         
         Assert.That(createdBook, Is.Not.Null);
+        Assert.That(createdBook.Id, Is.TypeOf<Guid>());
+        Assert.That(createdBook.Id, Is.Not.EqualTo(Guid.Empty));
         Assert.That(createdBook.Title, Is.EqualTo(book.Title));
         Assert.That(createdBook.Author, Is.EqualTo(book.Author));
         Assert.That(createdBook.Publisher, Is.EqualTo(book.Publisher));
@@ -46,7 +48,8 @@ public class BookServiceTests
         book.Publisher = "TestUpdateBookPublisher";
         book.PublishDate = DateTime.Now;
         var updatedBook = await _bookService.UpdateBook(book);
-
+        
+        Assert.That(book.Id, Is.EqualTo(updatedBook.Id));
         Assert.That(updatedBook, Is.Not.Null);
         Assert.That(updatedBook.Title, Is.EqualTo("TestUpdateBookTitle"));
         Assert.That(updatedBook.Author, Is.EqualTo("TestUpdateBookAuthor"));

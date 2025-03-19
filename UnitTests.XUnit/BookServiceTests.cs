@@ -20,6 +20,7 @@ public class BookServiceTests
     {
         var book = new Book("TestCreate", "TestCreateAuthor", "TestCreatePublisher", new DateTime());
         var createdBook = await  _bookService.CreateBook(book);
+        
         Assert.NotNull(createdBook);
         Assert.Equal(book.Title, createdBook.Title);
         Assert.Equal(book.Author, createdBook.Author);
@@ -30,8 +31,8 @@ public class BookServiceTests
     public async Task Test_UpdateBook()
     {
         var book = new Book("TestUpdate", "TestUpdateAuthor", "TestUpdatePublisher", new DateTime());
-
         var updatedBook = await  _bookService.UpdateBook(book);
+        
         Assert.NotNull(updatedBook);
         Assert.Equal(book.Title, updatedBook.Title);
         Assert.Equal(book.Author, updatedBook.Author);

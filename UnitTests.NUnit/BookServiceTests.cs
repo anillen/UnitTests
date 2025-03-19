@@ -18,7 +18,8 @@ public class BookServiceTests
     public async Task Test_GetBook()
     {
         var book = await _bookService.GetBook();
-        if (book is null)  throw new Exception("book is null");
+        Assert.That(book, Is.Not.Null);
+        Assert.That(book,Is.TypeOf<Book>());
     }
     
     [Test]
@@ -32,8 +33,9 @@ public class BookServiceTests
         Assert.That(createdBook.Title, Is.EqualTo(book.Title));
         Assert.That(createdBook.Author, Is.EqualTo(book.Author));
         Assert.That(createdBook.Publisher, Is.EqualTo(book.Publisher));
+        Assert.That(createdBook.PublishDate, Is.EqualTo(book.PublishDate));
     }
-    
+
     [Test]
     [TestCase(TestName = "Update book with NUnit")]
     public async Task Test_UpdateBook()
@@ -44,10 +46,11 @@ public class BookServiceTests
         book.Publisher = "TestUpdateBookPublisher";
         book.PublishDate = DateTime.Now;
         var updatedBook = await _bookService.UpdateBook(book);
-        
+
         Assert.That(updatedBook, Is.Not.Null);
         Assert.That(updatedBook.Title, Is.EqualTo("TestUpdateBookTitle"));
         Assert.That(updatedBook.Author, Is.EqualTo("TestUpdateBookAuthor"));
         Assert.That(updatedBook.Publisher, Is.EqualTo("TestUpdateBookPublisher"));
+        Assert.That(updatedBook.PublishDate, Is.EqualTo(book.PublishDate));   
     }
 }

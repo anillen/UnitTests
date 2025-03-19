@@ -13,6 +13,7 @@ public class BookServiceTests
     {
         var book = await _bookService.GetBook();
         Assert.NotNull(book);
+        Assert.IsType<Book>(book);
     }
 
     [Fact(DisplayName = "Create book with xUnit")]
@@ -25,6 +26,7 @@ public class BookServiceTests
         Assert.Equal(book.Title, createdBook.Title);
         Assert.Equal(book.Author, createdBook.Author);
         Assert.Equal(book.Publisher, createdBook.Publisher);
+        Assert.True(book.PublishDate.Equals(createdBook.PublishDate));
     }
     
     [Fact(DisplayName = "Update book with xUnit")]
@@ -37,5 +39,6 @@ public class BookServiceTests
         Assert.Equal(book.Title, updatedBook.Title);
         Assert.Equal(book.Author, updatedBook.Author);
         Assert.Equal(book.Publisher, updatedBook.Publisher);
+        Assert.True(book.PublishDate.Equals(updatedBook.PublishDate));
     }
 }

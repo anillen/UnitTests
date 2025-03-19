@@ -27,10 +27,10 @@ public class BookServiceTests
     {
         Book book = new Book("TestCreateBook", "TestCreateBookAuthor", "TestCreateBookTitle", new DateTime());
         var createdBook = await _bookService.CreateBook(book);
-        if(createdBook is null)  throw new Exception("created book is null");
-        if(createdBook.Title != book.Title) throw new Exception("created book title is invalid");
-        if(createdBook.Author != book.Author) throw new Exception("created book author is invalid");
-        if(createdBook.Publisher != book.Publisher) throw new Exception("created book publisher is invalid");
+        Assert.That(createdBook, Is.Not.Null);
+        Assert.That(createdBook.Title, Is.EqualTo(book.Title));
+        Assert.That(createdBook.Author, Is.EqualTo(book.Author));
+        Assert.That(createdBook.Publisher, Is.EqualTo(book.Publisher));
     }
     
     [Test]
@@ -43,9 +43,9 @@ public class BookServiceTests
         book.Publisher = "TestUpdateBookPublisher";
         book.PublishDate = DateTime.Now;
         var updatedBook = await _bookService.UpdateBook(book);
-        if (updatedBook is null)  throw new Exception("updated book is null");
-        if (updatedBook.Title != "TestUpdateBookTitle") throw new Exception("updated book title is invalid");
-        if(updatedBook.Author != "TestUpdateBookAuthor") throw new Exception("updated book author is invalid");
-        if(book.Publisher != "TestUpdateBookPublisher") throw new Exception("updated book publisher is invalid");
+        Assert.That(updatedBook, Is.Not.Null);
+        Assert.That(updatedBook.Title, Is.EqualTo("TestUpdateBookTitle"));
+        Assert.That(updatedBook.Author, Is.EqualTo("TestUpdateBookAuthor"));
+        Assert.That(updatedBook.Publisher, Is.EqualTo("TestUpdateBookPublisher"));
     }
 }
